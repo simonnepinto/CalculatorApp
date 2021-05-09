@@ -2,6 +2,8 @@ package com.simonne.calculatorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.view.Gravity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         button7.setOnClickListener(){addData("7", true)}
         button8.setOnClickListener(){addData("8", true)}
         button9.setOnClickListener(){addData("9", true)}
-        buttonDec.setOnClickListener(){addData(".", false)}
+        buttonDec.setOnClickListener(){addData(".", true)}
 
         addButton.setOnClickListener(){ addData("+", false)}
         subButton.setOnClickListener(){ addData("-", false)}
@@ -59,13 +61,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun calculate(){
         try {
-            val num = ExpressionBuilder(input.text.toString()).build()
-            val num2 = num.evaluate().toFloat()
-            output.text = num2.toString()
+            val exp = ExpressionBuilder(input.text.toString()).build()
+            val answer = exp.evaluate().toFloat()
+            output.text = answer.toString()
             input.text = ""
         }
         catch (e:Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            val toast = Toast.makeText (this, Html.fromHtml("<font color='#3E242E' ><b>" + e.message + "</b></font>"), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.BOTTOM,0,0)
+            toast.show()
         }
     }
 }
