@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="button0" type="id"/>
+    <item name="buttonEqual" type="id"/>
+    <item name="buttonClear" type="id"/>
+</resources>
